@@ -10,8 +10,8 @@ return {
       end,
     },
     keys = {
-      -- change a keymap
       { "<C-p>", "<cmd>Telescope find_files<CR>", desc = "Find Files" },
+      { "<C-g>", "<cmd>Telescope commands<CR>", desc = "Show available commands" },
       -- add a keymap to browse plugin files
       {
         "<leader>fp",
