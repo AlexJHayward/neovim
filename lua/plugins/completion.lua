@@ -1,43 +1,40 @@
 return {
-  -- customize nvim-cmp configs
-  -- Use <tab> for completion and snippets (supertab)
-  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
+  -- disable default <tab> and <s-tab> behavior in LuaSnip
   {
     "L3MON4D3/LuaSnip",
     keys = function()
       return {}
     end,
   },
-  -- then: setup supertab in cmp
+  -- behaviour should be:
+  -- <tab> to show suggestions
+  -- <tab> to go to next suggestions
+  -- <s-tab> to go to previous
+  -- <cr> to insert selected suggestion
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
     },
+    enabled = function()
+      local in_prompt = vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
+      if in_prompt then -- this will disable cmp in the Telescope window (taken from the default config)
+        return false
+      end
+      local context = require("cmp.config.context")
+      return not (context.in_treesitter_capture("comment") == true or context.in_syntax_group("Comment"))
+    end,
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
-      -- This is reaaaally not easy to setup :D
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
-          -- If it's a snippet then jump between fields
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          -- otherwise if the completion pop is visible then complete
-          elseif cmp.visible() then
-            cmp.confirm({ select = false })
-          -- if the popup is not visible then open the popup
-          elseif has_words_before() then
-            cmp.complete()
-          -- otherwise fallback
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.jumpable(1) then
+            luasnip.jump(1)
           else
             fallback()
           end
