@@ -20,12 +20,25 @@ return {
         end,
         desc = "Find Plugin File",
       },
-      -- This is using b because it used to be fzf's :Buffers
       {
         "<C-t>",
         "<cmd>Telescope buffers<cr>",
         desc = "Recent",
       },
     },
+    --   opts = {
+    --     defaults = {
+    --       mappings = {
+    --         i = {
+    --           ["<C-k>"] = function(...)
+    --             return require("telescope.actions").move_selection_previous(...)
+    --           end,
+    --           ["<C-j>"] = function(...)
+    --             return require("telescope.actions").move_selection_next(...)
+    --           end,
+    --         },
+    --       },
+    --     },
+    --   },
   },
 }
