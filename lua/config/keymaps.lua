@@ -82,6 +82,7 @@ command! NewScratch silent! execute "call Scratch()"
 
 -- mix test convenience commands
 vim.api.nvim_create_user_command("MixTest", "terminal mix test", {})
+vim.api.nvim_create_user_command("MixTestFailed", "terminal mix test --failed", {})
 vim.api.nvim_create_user_command("MixTestFile", "terminal mix test %", {})
 vim.api.nvim_create_user_command("MixTestOnly", function()
   local line = vim.fn.line(".")
