@@ -3,7 +3,7 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   { "sainnhe/everforest" },
 
-  -- Configure LazyVim to load gruvbox
+  -- Configure LazyVim to load a theme
   {
     "LazyVim/LazyVim",
     opts = {
