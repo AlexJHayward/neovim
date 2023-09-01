@@ -96,3 +96,17 @@ end, {})
 --   local line = vim.fn.line(".")
 --   vim.api.nvim_command("terminal task test % --only line:" .. line)
 -- end, {})
+
+-- Yank file name / relative path
+vim.keymap.set(
+  "n",
+  "<leader>Yf",
+  ':let @*=expand("%")<CR>',
+  { desc = "Yank the current relative filepath to the system clipboard" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>Ya",
+  ':let @*=expand("%:p") <CR>',
+  { desc = "Yank the current absolute filepath to the system clipboard" }
+)
