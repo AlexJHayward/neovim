@@ -47,6 +47,7 @@ return {
       search = {
         mode = "fuzzy",
       },
+      jump = { nohlsearch = true },
     },
   },
 }
