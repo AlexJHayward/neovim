@@ -1,3 +1,4 @@
+local wk = require("which-key")
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
@@ -80,33 +81,28 @@ command! NewScratch silent! execute "call Scratch()"
   false
 )
 
--- mix test convenience commands
-vim.api.nvim_create_user_command("MixTest", "terminal mix test", {})
-vim.api.nvim_create_user_command("MixTestFailed", "terminal mix test --failed", {})
-vim.api.nvim_create_user_command("MixTestFile", "terminal mix test %", {})
-vim.api.nvim_create_user_command("MixTestOnly", function()
-  local line = vim.fn.line(".")
-  vim.api.nvim_command("terminal mix test % --only line:" .. line)
-end, {})
--- mix test convenience commands
--- vim.api.nvim_create_user_command("TaskTest", "terminal task test", {})
--- vim.api.nvim_create_user_command("TaskTestFailed", "terminal task test --failed", {})
--- vim.api.nvim_create_user_command("TaskTestFile", "terminal task test %", {})
--- vim.api.nvim_create_user_command("TaskTestOnly", function()
---   local line = vim.fn.line(".")
---   vim.api.nvim_command("terminal task test % --only line:" .. line)
--- end, {})
-
 -- Yank file name / relative path
-vim.keymap.set(
-  "n",
-  "<leader>Yf",
-  ':let @*=expand("%")<CR>',
-  { desc = "Yank the current relative filepath to the system clipboard" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>Ya",
-  ':let @*=expand("%:p") <CR>',
-  { desc = "Yank the current absolute filepath to the system clipboard" }
-)
+wk.register({
+  Y = {
+    name = "Yank special",
+    f = { ':let @*=expand("%")<CR>', "Yank the current relative filepath to the system clipboard" },
+    a = { ':let @*=expand("%:p") <CR>', "Yank the current absolute filepath to the system clipboard" },
+  },
+}, { prefix = "<leader>" })
+
+-- Neotest
+local neotest = require("neotest")
+wk.register({
+  t = {
+    name = "Neotest",
+    r = { neotest.run.run, "Run the nearest test." },
+    s = { neotest.summary.toggle, "Toggle the summary window." },
+    o = { neotest.output_panel.toggle, "Toggle the output panel." },
+    f = {
+      function()
+        neotest.run.run(vim.fn.expand("%"))
+      end,
+      "Run all tests in the current file",
+    },
+  },
+}, { prefix = "<leader>" })
