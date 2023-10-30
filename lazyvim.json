@@ -1,8 +1,12 @@
 {
   "extras": [
-    "ui.alpha"
+    "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.ui.alpha",
+    "lazyvim.plugins.extras.coding.copilot"
   ],
   "news": {
-    "NEWS.md": "2035"
-  }
+    "NEWS.md": "2123"
+  },
+  "version": 2
 }
+
