@@ -31,11 +31,18 @@ return {
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
+        ["<Right>"] = cmp.mapping(function(fallback)
+          if require("copilot.suggestion").is_visible() then
+            require("copilot.suggestion").accept()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif require("copilot.suggestion").is_visible() then
-            require("copilot.suggestion").accept()
+          -- elseif require("copilot.suggestion").is_visible() then
+          --   require("copilot.suggestion").accept()
           elseif luasnip.jumpable(1) then
             luasnip.jump(1)
           else
