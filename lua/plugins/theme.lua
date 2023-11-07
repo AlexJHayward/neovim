@@ -9,13 +9,15 @@ return {
   { "AlexvZyl/nordic.nvim" },
   { "shaunsingh/nord.nvim" },
   { "ronisbr/nano-theme.nvim" },
+  { "kvrohit/mellow.nvim" },
+  { "aditya-azad/candle-grey" },
   { "Lokaltog/monotone.nvim", dependencies = { "rktjmp/lush.nvim" } },
 
   -- load theme on startup
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfox",
+      colorscheme = "candle-grey",
     },
   },
 }
