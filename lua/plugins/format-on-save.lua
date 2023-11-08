@@ -10,6 +10,7 @@ return {
       ["vue"] = { "prettier" },
       ["css"] = { "prettier" },
       ["scss"] = { "prettier" },
+      ["prisma"] = { "prettier" },
       ["less"] = { "prettier" },
       ["html"] = { "prettier" },
       ["json"] = { "prettier" },
