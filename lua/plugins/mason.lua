@@ -6,6 +6,7 @@ return {
       "shfmt",
       "css-lsp",
       "elixir-ls",
+      "eslint_d",
       "gleam",
       "html-lsp",
       "json-lsp",
