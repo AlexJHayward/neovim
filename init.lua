@@ -6,4 +6,4 @@ vim.wo.wrap = true
 
 -- enable spellchecker
 vim.wo.spell = true
-vim.wo.spelllang = "en_us"
+vim.bo.spelllang = "en_us"
