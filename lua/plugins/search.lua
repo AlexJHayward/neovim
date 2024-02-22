@@ -25,6 +25,11 @@ return {
         "<cmd>Telescope buffers<cr>",
         desc = "Recent",
       },
+      {
+        "<leader>ss",
+        "<cmd>Telescope aerial<cr>",
+        desc = "Goto Symbol (Aerial)",
+      },
     },
     --   opts = {
     --     defaults = {
@@ -39,7 +44,11 @@ return {
     --         },
     --       },
     --     },
-    --   },
+    opts = function()
+      require("lazyvim.util").on_load("telescope.nvim", function()
+        require("telescope").load_extension("aerial")
+      end)
+    end,
   },
   {
     "folke/flash.nvim",
